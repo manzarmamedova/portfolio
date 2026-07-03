@@ -370,8 +370,8 @@
         }
 
         .avatar-box {
-            width: 150px;
-            height: 150px;
+            width: 200px;
+            height: 200px;
             border-radius: 4px;
             background: linear-gradient(155deg, var(--bg-elev-2), var(--bg-elev));
             border: 1px solid var(--line-bright);
@@ -413,7 +413,7 @@
 
         .about-text p {
             color: var(--silver);
-            font-size: 16px;
+            font-size: 20px;
             margin-bottom: 14px;
             max-width: 560px;
         }
@@ -466,59 +466,92 @@
         }
 
         /* ---------- PROJECTS ---------- */
+
+        .projects-grid {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 24px;
+            width: 100%;
+            max-width: 1200px;
+            /* İçeriğin dışarı taşmasını önler */
+            margin: 0 auto;
+        }
+
         .project-card {
             border: 1px solid var(--line);
-            border-radius: 4px;
-            padding: 36px;
-            margin-bottom: 24px;
-            background: linear-gradient(180deg, var(--bg-elev) 0%, transparent 100%);
+            border-radius: 12px;
+            padding: 24px;
+            background: var(--bg-elev);
             transition: border-color .3s ease, transform .3s ease;
-            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            box-sizing: border-box;
         }
 
         .project-card:hover {
             border-color: var(--line-bright);
-            transform: translateY(-3px);
+            transform: translateY(-4px);
         }
 
-        .project-head {
+        /* Resim kutusunun yatayda ve dikeyde fazla büyümesini engelliyoruz */
+        .project-image {
+            width: 100%;
+            height: 450px;
+            /* Sabit yükseklik vererek dikeyde ve yatayda taşmayı önledik */
+            overflow: hidden;
+            border-radius: 6px;
+            background: #17142a;
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-bottom: 14px;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--line);
         }
 
-        .project-method {
-            font-family: var(--mono);
-            font-size: 11px;
-            color: var(--lilac-bright);
-            border: 1px solid var(--lilac-dim);
-            padding: 3px 9px;
-            border-radius: 2px;
-            white-space: nowrap;
+
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+
+            object-position: top center;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.03);
+        }
+
+        .project-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1;
         }
 
         .project-title {
             font-family: var(--display);
-            font-size: 22px;
+            font-size: 20px;
             color: var(--silver-bright);
             font-weight: 600;
+            margin-bottom: 6px;
         }
 
         .project-desc {
             color: var(--silver);
-            font-size: 15px;
-            margin-bottom: 20px;
-            max-width: 600px;
+            font-size: 14px;
+            margin-bottom: 16px;
+            line-height: 1.5;
         }
 
         .project-stack {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 22px;
+            gap: 6px;
+            margin-bottom: 16px;
         }
 
         .stack-tag {
@@ -526,31 +559,45 @@
             font-size: 11px;
             color: var(--silver);
             background: var(--bg-elev-2);
-            padding: 5px 10px;
-            border-radius: 2px;
+            padding: 4px 8px;
+            border-radius: 4px;
             border: 1px solid var(--line);
         }
 
         .project-links {
             display: flex;
-            gap: 24px;
+            gap: 16px;
+            margin-top: auto;
+            /* Linkleri kartın en altına sabitler */
         }
 
         .project-links a {
             font-family: var(--mono);
-            font-size: 12.5px;
+            font-size: 13px;
             color: var(--silver-bright);
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             border-bottom: 1px solid var(--line-bright);
             padding-bottom: 2px;
+            text-decoration: none;
             transition: color .25s ease, border-color .25s ease;
         }
 
         .project-links a:hover {
             color: var(--lilac-bright);
             border-color: var(--lilac-bright);
+        }
+
+        /* Sadece gerçek mobil cihazlarda (küçük ekranlarda) alt alta gelmesi için */
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            .project-image {
+                height: 180px;
+            }
         }
 
         /* ---------- CONTACT ---------- */
@@ -683,8 +730,8 @@
         <!-- HERO -->
         <section class="hero" id="home">
             <h1>Manzar Mamedova</h1>
-            <div class="hero-role">Backend Developer <span class="pipe">|</span> <span class="accent">Java</span> &amp;
-                <span class="accent">Spring Boot</span>
+            <div class="hero-role">
+                <span class="accent">Java Backend Developer</span>
             </div>
             <div class="hero-buttons">
                 <a href="#projects" class="btn btn-primary">View Projects</a>
@@ -719,19 +766,31 @@
             <h2 class="reveal">Technologies</h2>
             <div class="skills-grid reveal">
                 <div class="skill-cell"><span class="skill-idx">01</span><span class="skill-name">Java</span><span
-                        class="skill-note">core language</span></div>
+                        class="skill-note">Core Language</span></div>
+
                 <div class="skill-cell"><span class="skill-idx">02</span><span class="skill-name">Spring
-                        Boot</span><span class="skill-note">backend framework</span></div>
-                <div class="skill-cell"><span class="skill-idx">03</span><span class="skill-name">SQL</span><span
-                        class="skill-note">PostgreSQL</span></div>
-                <div class="skill-cell"><span class="skill-idx">04</span><span class="skill-name">HTML/CSS</span><span
-                        class="skill-note">markup &amp; styling</span></div>
-                <div class="skill-cell"><span class="skill-idx">05</span><span class="skill-name">Git</span><span
-                        class="skill-note">version control</span></div>
-                <div class="skill-cell"><span class="skill-idx">06</span><span class="skill-name">Postman</span><span
-                        class="skill-note">API testing</span></div>
+                        Boot</span><span class="skill-note">Backend Framework</span></div>
+
+                <div class="skill-cell"><span class="skill-idx">03</span><span class="skill-name">Spring
+                        Security</span><span class="skill-note">Authentication & Authorization</span></div>
+
+                <div class="skill-cell"><span class="skill-idx">04</span><span class="skill-name">REST API</span><span
+                        class="skill-note">Backend Development</span></div>
+
+                <div class="skill-cell"><span class="skill-idx">05</span><span class="skill-name">PostgreSQL</span><span
+                        class="skill-note">Relational Database</span></div>
+
+                <div class="skill-cell"><span class="skill-idx">06</span><span class="skill-name">Hibernate /
+                        JPA</span><span class="skill-note">ORM</span></div>
+
                 <div class="skill-cell"><span class="skill-idx">07</span><span class="skill-name">Docker</span><span
-                        class="skill-note">learning</span></div>
+                        class="skill-note">Containerization</span></div>
+
+                <div class="skill-cell"><span class="skill-idx">08</span><span class="skill-name">Git</span><span
+                        class="skill-note">Version Control</span></div>
+
+                <div class="skill-cell"><span class="skill-idx">09</span><span class="skill-name">Postman</span><span
+                        class="skill-note">API Testing</span></div>
             </div>
         </section>
 
@@ -740,40 +799,64 @@
             <div class="eyebrow">GET /projects</div>
             <h2 class="reveal">Selected Work</h2>
 
+
+            <div class="project-card reveal">
+
+                <!-- IMAGE PLACEHOLDER -->
+                <div class="project-image">
+                    <img src="blogapp.png" alt="Project Screenshot">
+                </div>
+
+                <!-- CONTENT -->
+                <div class="project-content">
+
+                    <div class="project-title">DevBlog</div>
+
+                    <p class="project-desc">
+                        A full-stack blogging platform built with Spring Boot, featuring role-based authentication,
+                        multilingual support, REST APIs, caching, Docker deployment, and PostgreSQL persistence.
+                    </p>
+
+                    <div class="project-stack">
+                        <span class="stack-tag">Java</span>
+                        <span class="stack-tag">Spring Boot</span>
+                        <span class="stack-tag">Spring Security</span>
+                        <span class="stack-tag">PostgreSQL</span>
+                        <span class="stack-tag">REST API</span>
+                        <span class="stack-tag">Docker</span>
+                    </div>
+
+                    <div class="project-links">
+                        <a href="YOUR_GITHUB_LINK" target="_blank">GitHub</a>
+                        <a href="YOUR_LIVE_LINK" target="_blank">Live Demo</a>
+                    </div>
+
+                </div>
+            </div>
+
             <div class="project-card reveal">
                 <div class="project-head">
                     <div class="project-title">Finance Tracker</div>
                     <div class="project-method">FULLSTACK</div>
                 </div>
-                <p class="project-desc">A personal finance tracking application with a Java REST API backend for
-                    managing transactions and a dedicated frontend client.</p>
+
+                <p class="project-desc">
+                    A personal finance management application built with Spring Boot, featuring JWT authentication, user
+                    and category management, transaction filtering, and financial reporting through a secure REST API.
+                </p>
                 <div class="project-stack">
-                    <span class="stack-tag">Java</span><span class="stack-tag">Spring Boot</span><span
-                        class="stack-tag">REST API</span><span class="stack-tag">HTML/CSS</span>
+                    <span class="stack-tag">Java</span>
+                    <span class="stack-tag">Spring Boot</span>
+                    <span class="stack-tag">Spring Security</span>
+                    <span class="stack-tag">JWT</span>
+                    <span class="stack-tag">PostgreSQL</span>
+                    <span class="stack-tag">REST API</span>
                 </div>
                 <div class="project-links">
                     <a href="https://github.com/manzarmamedova/MyFinanceApp" target="_blank" rel="noopener">→ Backend
                         Repo</a>
                     <a href="https://github.com/manzarmamedova/MyFinanceApp-Frontend" target="_blank" rel="noopener">→
                         Frontend Repo</a>
-                </div>
-            </div>
-
-            <div class="project-card reveal">
-                <div class="project-head">
-                    <div class="project-title">BlogApp</div>
-                    <div class="project-method">FULLSTACK</div>
-                </div>
-                <p class="project-desc">A full blogging platform built with a layered Spring Boot architecture,
-                    PostgreSQL persistence, and server-rendered FreeMarker templates.</p>
-                <div class="project-stack">
-                    <span class="stack-tag">Java</span><span class="stack-tag">Spring Boot</span><span
-                        class="stack-tag">PostgreSQL</span><span class="stack-tag">FreeMarker</span><span
-                        class="stack-tag">Docker</span>
-                </div>
-                <div class="project-links">
-                    <a href="https://github.com/manzarmamedova/blog-app" target="_blank" rel="noopener">→ GitHub
-                        Repo</a>
                 </div>
             </div>
 
@@ -794,24 +877,34 @@
             </div>
 
             <div class="project-card reveal">
-                <div class="project-head">
-                    <div class="project-title">PhaDent Dental Clinic</div>
-                    <div class="project-method">FRONTEND</div>
-                </div>
-                <p class="project-desc">A reservation website for a dental clinic, covering appointment booking and
-                    clinic information with a clean, responsive interface.</p>
-                <div class="project-stack">
-                    <span class="stack-tag">HTML</span><span class="stack-tag">CSS</span><span
-                        class="stack-tag">JavaScript</span>
-                </div>
-                <div class="project-links">
-                    <a href="https://github.com/manzarmamedova/PhaDent_Dental_Clinic" target="_blank" rel="noopener">
-                        → GitHub Repo
-                    </a>
 
-                    <a href="https://manzarmamedova.github.io/PhaDent_Dental_Clinic/" target="_blank" rel="noopener">
-                        → Live Demo
-                    </a>
+                <!-- IMAGE -->
+                <div class="project-image">
+                    <img src="phadent.png" alt="PhaDent Dental Clinic Screenshot">
+                </div>
+
+                <!-- CONTENT -->
+                <div class="project-content">
+
+                    <div class="project-title">PhaDent Dental Clinic</div>
+
+                    <p class="project-desc">
+                        A responsive dental clinic website built with HTML, CSS and JavaScript.
+                        It includes a modern UI design, service sections, doctor profiles and a live deployed demo.
+                    </p>
+
+                    <div class="project-stack">
+                        <span class="stack-tag">HTML</span>
+                        <span class="stack-tag">CSS</span>
+                        <span class="stack-tag">JavaScript</span>
+                        <span class="stack-tag">Responsive Design</span>
+                    </div>
+
+                    <div class="project-links">
+                        <a href="https://github.com/manzarmamedova/PhaDent_Dental_Clinic" target="_blank">GitHub</a>
+                        <a href="https://manzarmamedova.github.io/PhaDent_Dental_Clinic/" target="_blank">Live Demo</a>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -829,6 +922,11 @@
                     <a class="contact-link" href="https://www.linkedin.com/in/manzar-mamedova-2a842b375" target="_blank"
                         rel="noopener">LinkedIn</a>
                     <a class="contact-link" href="mailto:manzar.mamedova20@gmail.com" id="emailLink">Email</a>
+
+                    <a class="contact-link" href="Manzar_Mamedova_CV.pdf" target="_blank">
+
+                        Resume
+                    </a>
                 </div>
             </div>
         </section>
@@ -836,7 +934,7 @@
     </div>
 
     <footer>
-        © 2026 Manzar Mamedova — Built with Java in mind.
+        Designed & Developed by Manzar Mamedova
     </footer>
 
     <script>
